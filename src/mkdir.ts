@@ -1,7 +1,7 @@
 import path from 'path';
 import util from 'util';
 import fs from 'graceful-fs';
-import isExist from './isExist';
+import isExist from './isexist';
 
 export default async function mkdir(dir: string): Promise<void> {
   const paths: string[] = path

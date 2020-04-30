@@ -1,4 +1,4 @@
-import { lstat } from './promiseFs';
+import { lstat } from './promise_fs';
 
 interface Checker {
   (fileName: string, fileType: 'd' | 'f'): boolean;

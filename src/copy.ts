@@ -1,9 +1,9 @@
 import path from 'path';
-import isExist from './isExist';
+import isExist from './isexist';
 import mkdir from './mkdir';
 import pipe from './pipe';
 import { Checker, getFileStat } from './helper';
-import { readdir } from './promiseFs';
+import { readdir } from './promise_fs';
 
 const getStat = async (locate: string): Promise<'n' | 'd' | 'f'> => {
   if (!(await isExist(locate))) {
@@ -73,5 +73,3 @@ export default async function copy(
       throw new Error('参数错误');
   }
 }
-
-copy(path.join(__dirname), path.join(__dirname, '../fuck'));

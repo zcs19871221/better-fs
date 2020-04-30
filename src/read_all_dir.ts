@@ -1,6 +1,6 @@
 import path from 'path';
-import isExist from './isExist';
-import { readdir } from './promiseFs';
+import isExist from './isexist';
+import { readdir } from './promise_fs';
 import { Checker, getFileStat } from './helper';
 
 export default async function readDir(

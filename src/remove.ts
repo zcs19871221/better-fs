@@ -1,7 +1,7 @@
 import path from 'path';
 import { Checker, getFileStat } from './helper';
-import isExist from './isExist';
-import { readdir, unlink } from './promiseFs';
+import isExist from './isexist';
+import { readdir, unlink } from './promise_fs';
 
 export default async function remove(
   target: string,
@@ -21,4 +21,3 @@ export default async function remove(
     (await readdir(target)).map((each) => remove(path.join(target, each))),
   );
 }
-remove(__dirname);

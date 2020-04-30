@@ -1,7 +1,7 @@
 import path from 'path';
 import { WriteFileOptions } from 'graceful-fs';
 import mkdir from './mkdir';
-import { writeFile } from './promiseFs';
+import { writeFile } from './promise_fs';
 
 export default async function ensureWriteFile(
   locate: string,

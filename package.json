@@ -9,15 +9,8 @@
   },
   "license": "ISC",
   "scripts": {
-    "js": "node ../bin/eslint.js src",
-    "format": "node ../bin/prettier.js src",
-    "test": "node ../bin/jest.js src",
-    "watch": "npm run test -- --watch",
-    "report": "npm run test -- --coverage",
-    "check": "npm run js && npm run test && npm run format",
-    "preversion": "npm run check",
-    "postversion": "node ../bin/build.js && cd dist && npm publish",
-    "postpublish": "node ../../bin/updateDepVersion.js"
+    "build": "tsc",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
