@@ -1,0 +1,4 @@
+node_modules/
+/test
+/__better-code__/jest/coverage
+/dist
