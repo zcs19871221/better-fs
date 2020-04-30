@@ -24,7 +24,7 @@ export default async function copy(
   src: string,
   dest: string,
   options: Options = {},
-) {
+): Promise<any> {
   options = {
     overwrite: false,
     inner: false,
@@ -49,8 +49,7 @@ export default async function copy(
       if (options.overwrite === false && destType === 'f') {
         return;
       }
-      await pipe(src, dest);
-      break;
+      return pipe(src, dest);
     }
     case 'dn':
     case 'df':
@@ -63,7 +62,7 @@ export default async function copy(
       const child = await readdir(src);
       const isInner = options.inner;
       delete options.inner;
-      await Promise.all(
+      return Promise.all(
         child.map((target) =>
           copy(
             path.join(src, target),
@@ -72,7 +71,6 @@ export default async function copy(
           ),
         ),
       );
-      break;
     }
     default:
       throw new Error('参数错误');
