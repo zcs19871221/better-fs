@@ -2,21 +2,18 @@ import path from 'path';
 import isExist from './isExist';
 import mkdir from './mkdir';
 import pipe from './pipe';
-import { lstat, readdir } from './promiseFs';
+import { Checker, getFileStat } from './helper';
+import { readdir } from './promiseFs';
 
-const getFileStat = async (locate: string): Promise<'n' | 'd' | 'f'> => {
+const getStat = async (locate: string): Promise<'n' | 'd' | 'f'> => {
   if (!(await isExist(locate))) {
     return 'n';
   }
-  const destStat = await lstat(locate);
-  if (destStat.isDirectory()) {
-    return 'd';
-  }
-  return 'f';
+  return await getFileStat(locate);
 };
 
 interface Options {
-  filter?: (fileName: string, fileType: 'd' | 'f') => boolean;
+  filter?: Checker;
   overwrite?: boolean;
   inner?: boolean;
 }
@@ -31,14 +28,14 @@ export default async function copy(
     ...options,
   };
 
-  const srcType = await getFileStat(src);
+  const srcType = await getStat(src);
   if (srcType === 'n') {
     return;
   }
   if (options.filter && options.filter(src, srcType) === false) {
     return;
   }
-  const destType = await getFileStat(dest);
+  const destType = await getStat(dest);
   switch (srcType + destType) {
     case 'fd':
     case 'ff':

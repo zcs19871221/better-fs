@@ -1,7 +1,7 @@
 import path from 'path';
-import { Checker } from './index.d';
+import { Checker, getFileStat } from './helper';
 import isExist from './isExist';
-import { lstat, readdir, unlink } from './promiseFs';
+import { readdir, unlink } from './promiseFs';
 
 export default async function remove(
   target: string,
@@ -10,7 +10,7 @@ export default async function remove(
   if (!(await isExist(target))) {
     return;
   }
-  const type = (await lstat(target)).isDirectory ? 'd' : 'f';
+  const type = await getFileStat(target);
   if (options && options.keeper && options.keeper(target, type)) {
     return;
   }
@@ -21,3 +21,4 @@ export default async function remove(
     (await readdir(target)).map((each) => remove(path.join(target, each))),
   );
 }
+remove(__dirname);

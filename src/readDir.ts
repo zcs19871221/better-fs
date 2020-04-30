@@ -1,17 +1,18 @@
 import path from 'path';
 import isExist from './isExist';
-import { lstat, readdir } from './promiseFs';
+import { readdir } from './promiseFs';
+import { Checker, getFileStat } from './helper';
 
 export default async function readDir(
   dir: string,
   options?: {
-    filter?: (fileName: string, fileType: 'd' | 'f') => boolean;
+    filter?: Checker;
   },
 ): Promise<string[]> {
   if (!(await isExist(dir))) {
     return [];
   }
-  const type = (await (await lstat(dir)).isDirectory) ? 'f' : 'd';
+  const type = await getFileStat(dir);
   if (options && options.filter && options.filter(dir, type) === false) {
     return [];
   }
