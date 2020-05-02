@@ -1,16 +1,8 @@
 import path from 'path';
-import isExist from './isexist';
 import mkdir from './mkdir';
 import pipe from './pipe';
 import { Checker, getFileStat } from './helper';
 import { readdir } from './promise_fs';
-
-const getStat = async (locate: string): Promise<'n' | 'd' | 'f'> => {
-  if (!(await isExist(locate))) {
-    return 'n';
-  }
-  return await getFileStat(locate);
-};
 
 interface Options {
   filter?: Checker;
@@ -28,14 +20,14 @@ export default async function copy(
     ...options,
   };
 
-  const srcType = await getStat(src);
+  const srcType = await getFileStat(src);
   if (srcType === 'n') {
     return;
   }
   if (options.filter && options.filter(src, srcType) === false) {
     return;
   }
-  const destType = await getStat(dest);
+  const destType = await getFileStat(dest);
   switch (srcType + destType) {
     case 'fd':
     case 'ff':

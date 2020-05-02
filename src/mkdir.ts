@@ -10,7 +10,7 @@ export default async function mkdir(dir: string): Promise<void> {
     .filter((each) => each.trim());
   const toMkdir: string[] = [];
   while (paths.length > 0 && (await isExist(paths.join(path.sep))) === false) {
-    toMkdir.push(<string>paths.pop());
+    toMkdir.unshift(<string>paths.pop());
   }
   for (const toMk of toMkdir) {
     paths.push(toMk);

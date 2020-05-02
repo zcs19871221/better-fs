@@ -1,18 +1,17 @@
 import path from 'path';
-import isExist from './isexist';
 import { readdir } from './promise_fs';
 import { Checker, getFileStat } from './helper';
 
-export default async function readDir(
+export default async function readAllDir(
   dir: string,
   options?: {
     filter?: Checker;
   },
 ): Promise<string[]> {
-  if (!(await isExist(dir))) {
+  const type = await getFileStat(dir);
+  if (type === 'n') {
     return [];
   }
-  const type = await getFileStat(dir);
   if (options && options.filter && options.filter(dir, type) === false) {
     return [];
   }
@@ -20,7 +19,7 @@ export default async function readDir(
     return (
       await Promise.all(
         (await readdir(dir)).map((target) =>
-          readDir(path.join(dir, target), options),
+          readAllDir(path.join(dir, target), options),
         ),
       )
     ).reduce((acc, cur) => {
