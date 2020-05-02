@@ -16,14 +16,17 @@ export default async function readAllDir(
     return [];
   }
   if (type === 'd') {
-    return (
-      await Promise.all(
-        (await readdir(dir)).map((target) =>
-          readAllDir(path.join(dir, target), options),
-        ),
-      )
-    ).reduce((acc, cur) => {
-      return [...acc, ...cur];
+    return Promise.all(
+      (await readdir(dir)).map((target) =>
+        readAllDir(path.join(dir, target), options),
+      ),
+    ).then((results) => {
+      return results.reduce(
+        (acc, cur) => {
+          return [...acc, ...cur];
+        },
+        [dir],
+      );
     });
   }
   return [dir];

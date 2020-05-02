@@ -25,9 +25,17 @@ it('mkdir', async () => {
   await mkdir(path.join(workdir, 'a', 'b', 'c', 'd'));
   await mkdir(workdir + '/e' + '\\f' + '//g/');
   const dirs = await read_all_dir(workdir);
-  expect(dirs.sort()).toEqual([
-    path.join(workdir, 'onelevel'),
-    path.join(workdir, 'a', 'b', 'c', 'd'),
-    path.join(workdir, 'e', 'f', 'g'),
-  ]);
+  expect(dirs.sort()).toEqual(
+    [
+      workdir,
+      path.join(workdir, 'onelevel'),
+      path.join(workdir, 'a'),
+      path.join(workdir, 'a', 'b'),
+      path.join(workdir, 'a', 'b', 'c'),
+      path.join(workdir, 'a', 'b', 'c', 'd'),
+      path.join(workdir, 'e'),
+      path.join(workdir, 'e', 'f'),
+      path.join(workdir, 'e', 'f', 'g'),
+    ].sort(),
+  );
 });
