@@ -13,7 +13,7 @@ export default async function remove(
   if (options && options.keeper && options.keeper(target, type)) {
     return;
   }
-  if (type === 'd') {
+  if (type === 'f') {
     return unlink(target);
   }
   return Promise.all(
