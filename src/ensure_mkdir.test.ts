@@ -1,6 +1,5 @@
 import ensureMkdir from './ensure_mkdir';
 import remove from './remove';
-import read_includes from './read_includes';
 import fs from 'fs';
 import path from 'path';
 
@@ -24,18 +23,7 @@ it('ensureMkdir', async () => {
   await ensureMkdir(path.join(workdir, 'onelevel'));
   await ensureMkdir(path.join(workdir, 'a', 'b', 'c', 'd'));
   await ensureMkdir(workdir + '/e' + '\\f' + '//g/');
-  const dirs = await read_includes(workdir);
-  expect(dirs.sort()).toEqual(
-    [
-      workdir,
-      path.join(workdir, 'onelevel'),
-      path.join(workdir, 'a'),
-      path.join(workdir, 'a', 'b'),
-      path.join(workdir, 'a', 'b', 'c'),
-      path.join(workdir, 'a', 'b', 'c', 'd'),
-      path.join(workdir, 'e'),
-      path.join(workdir, 'e', 'f'),
-      path.join(workdir, 'e', 'f', 'g'),
-    ].sort(),
-  );
+  expect(fs.existsSync(path.join(workdir, 'onelevel'))).toBe(true);
+  expect(fs.existsSync(path.join(workdir, 'a/b/c/d'))).toBe(true);
+  expect(fs.existsSync(path.join(workdir, 'e/f/g'))).toBe(true);
 });
