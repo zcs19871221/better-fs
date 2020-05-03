@@ -14,5 +14,5 @@ export { default as isExistSync } from './isExistSync';
 export { default as ensureMkdir } from './ensure_mkdir';
 export { default as move } from './move';
 export { default as pipe } from './pipe';
-export { default as readIncludes } from './read_includes';
+export { default as readIncludes } from './read_include';
 export { default as remove } from './remove';

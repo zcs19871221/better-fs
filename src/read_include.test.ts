@@ -1,5 +1,5 @@
-import readIncludes from './read_includes';
 import remove from './remove';
+import readIncludes from './read_include';
 import fs from 'fs';
 import path from 'path';
 
@@ -32,15 +32,5 @@ it('readIncludes', async () => {
   fs.mkdirSync(hasSubDir);
   fs.writeFileSync(hasSubFile, 'hasSubFile');
   const dirs = await readIncludes(workdir);
-  expect(dirs.sort()).toEqual(
-    [
-      emptyDir,
-      hasDir,
-      rootFile,
-      hasFile,
-      hasSubDir,
-      hasSubFile,
-      workdir,
-    ].sort(),
-  );
+  expect(dirs.sort()).toEqual([rootFile, hasFile, hasSubFile].sort());
 });

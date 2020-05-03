@@ -15,7 +15,7 @@ export default async function readIncludes(dir: string): Promise<string[]> {
     ).then((results) => {
       return results.reduce((acc, cur) => {
         return [...acc, ...cur];
-      });
+      }, []);
     });
   }
   return [dir];
