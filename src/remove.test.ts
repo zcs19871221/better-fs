@@ -19,12 +19,14 @@ afterAll(async () => {
 });
 it('remove', async () => {
   const emptyDir = path.join(workdir, 'empty');
+  const emptySubDir = path.join(emptyDir, 'emptydSub');
   const hasDir = path.join(workdir, 'has');
   const rootFile = path.join(workdir, 'something.txt');
   const hasFile = path.join(hasDir, 'hasFile.txt');
   const hasSubDir = path.join(hasDir, 'hasSubDir');
   const hasSubFile = path.join(hasDir, 'hasSubFile.text');
   fs.mkdirSync(emptyDir);
+  fs.mkdirSync(emptySubDir);
   fs.mkdirSync(hasDir);
   fs.writeFileSync(rootFile, 'rootFile');
   fs.writeFileSync(hasFile, 'hasFile');
@@ -32,8 +34,10 @@ it('remove', async () => {
   fs.writeFileSync(hasSubFile, 'hasSubFile');
 
   expect(fs.existsSync(emptyDir)).toBe(true);
+  expect(fs.existsSync(emptySubDir)).toBe(true);
   await remove(emptyDir);
   expect(fs.existsSync(emptyDir)).toBe(false);
+  expect(fs.existsSync(emptySubDir)).toBe(false);
 
   expect(fs.existsSync(hasFile)).toBe(true);
   expect(fs.existsSync(hasDir)).toBe(true);

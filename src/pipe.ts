@@ -13,6 +13,7 @@ export default function pipe(src: string, dest: string) {
             reject(error);
           })
           .on('finish', () => {
+            console.log('end');
             resolve();
           });
       });
