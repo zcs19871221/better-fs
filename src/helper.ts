@@ -1,9 +1,10 @@
 import { lstat } from './promise_fs';
 import isExist from './isExist';
 
-interface Checker {
-  (fileName: string, fileType: 'd' | 'f'): boolean;
+interface Filter {
+  filter?: (fileName: string, fileType: 'd' | 'f') => Promise<boolean>;
 }
+
 const getFileStat = async (locate: string): Promise<'d' | 'f' | 'n'> => {
   if (!(await isExist(locate))) {
     return 'n';
@@ -14,4 +15,4 @@ const getFileStat = async (locate: string): Promise<'d' | 'f' | 'n'> => {
   }
   return 'f';
 };
-export { Checker, getFileStat };
+export { Filter, getFileStat };

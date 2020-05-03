@@ -1,6 +1,6 @@
-import mkdir from './mkdir';
+import ensureMkdir from './ensure_mkdir';
 import remove from './remove';
-import read_all_dir from './read_all_dir';
+import read_includes from './read_includes';
 import fs from 'fs';
 import path from 'path';
 
@@ -20,11 +20,11 @@ afterAll(async () => {
   await remove(workdir);
 });
 it('mkdir', async () => {
-  await mkdir(__dirname);
-  await mkdir(path.join(workdir, 'onelevel'));
-  await mkdir(path.join(workdir, 'a', 'b', 'c', 'd'));
-  await mkdir(workdir + '/e' + '\\f' + '//g/');
-  const dirs = await read_all_dir(workdir);
+  await ensureMkdir(__dirname);
+  await ensureMkdir(path.join(workdir, 'onelevel'));
+  await ensureMkdir(path.join(workdir, 'a', 'b', 'c', 'd'));
+  await ensureMkdir(workdir + '/e' + '\\f' + '//g/');
+  const dirs = await read_includes(workdir);
   expect(dirs.sort()).toEqual(
     [
       workdir,

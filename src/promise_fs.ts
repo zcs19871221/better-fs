@@ -7,3 +7,4 @@ export const rename = promisify(fs.rename);
 export const unlink = promisify(fs.unlink);
 export const writeFile = promisify(fs.writeFile);
 export const readFile = promisify(fs.readFile);
+export const rmdir = promisify(fs.rmdir);

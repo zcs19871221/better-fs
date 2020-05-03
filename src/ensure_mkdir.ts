@@ -3,7 +3,7 @@ import util from 'util';
 import fs from 'graceful-fs';
 import isExist from './isexist';
 
-export default async function mkdir(dir: string): Promise<void> {
+export default async function ensureMkdir(dir: string): Promise<void> {
   const paths: string[] = path
     .normalize(dir)
     .split(path.sep)

@@ -1,11 +1,10 @@
 import path from 'path';
-import mkdir from './mkdir';
+import ensureMkdir from './ensure_mkdir';
 import pipe from './pipe';
-import { Checker, getFileStat } from './helper';
+import { Filter, getFileStat } from './helper';
 import { readdir } from './promise_fs';
 
-interface Options {
-  filter?: Checker;
+interface Options extends Filter {
   overwrite?: boolean;
   inner?: boolean;
 }
@@ -24,7 +23,7 @@ export default async function copy(
   if (srcType === 'n') {
     return;
   }
-  if (options.filter && options.filter(src, srcType) === false) {
+  if (options.filter && (await options.filter(src, srcType)) === false) {
     return;
   }
   const destType = await getFileStat(dest);
@@ -44,7 +43,7 @@ export default async function copy(
     case 'df':
     case 'dd': {
       if (destType === 'n') {
-        await mkdir(dest);
+        await ensureMkdir(dest);
       } else if (destType === 'f') {
         dest = path.dirname(dest);
       }

@@ -1,7 +1,8 @@
 import path from 'path';
 import { rename } from './promise_fs';
 import isExist from './isexist';
-import mkdir from './mkdir';
+import ensureMkdir from './ensure_mkdir';
+
 export default async function move(src: string, dest: string): Promise<void> {
   if (src === dest) {
     return;
@@ -9,6 +10,6 @@ export default async function move(src: string, dest: string): Promise<void> {
   if (!(await isExist(src))) {
     return;
   }
-  await mkdir(path.dirname(dest));
+  await ensureMkdir(path.dirname(dest));
   return rename(src, dest);
 }

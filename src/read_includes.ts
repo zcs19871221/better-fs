@@ -1,24 +1,26 @@
 import path from 'path';
 import { readdir } from './promise_fs';
-import { Checker, getFileStat } from './helper';
+import { Filter, getFileStat } from './helper';
 
-export default async function readAllDir(
+export default async function readIncludes(
   dir: string,
-  options?: {
-    filter?: Checker;
-  },
+  options?: Filter,
 ): Promise<string[]> {
   const type = await getFileStat(dir);
   if (type === 'n') {
     return [];
   }
-  if (options && options.filter && options.filter(dir, type) === false) {
+  if (
+    options &&
+    options.filter &&
+    (await options.filter(dir, type)) === false
+  ) {
     return [];
   }
   if (type === 'd') {
     return Promise.all(
       (await readdir(dir)).map((target) =>
-        readAllDir(path.join(dir, target), options),
+        readIncludes(path.join(dir, target), options),
       ),
     ).then((results) => {
       return results.reduce(
