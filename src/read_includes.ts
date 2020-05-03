@@ -13,12 +13,9 @@ export default async function readIncludes(dir: string): Promise<string[]> {
         readIncludes(path.join(dir, target)),
       ),
     ).then((results) => {
-      return results.reduce(
-        (acc, cur) => {
-          return [...acc, ...cur];
-        },
-        [dir],
-      );
+      return results.reduce((acc, cur) => {
+        return [...acc, ...cur];
+      });
     });
   }
   return [dir];
