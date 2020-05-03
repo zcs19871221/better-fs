@@ -19,7 +19,7 @@ beforeAll(async () => {
 afterAll(async () => {
   await remove(workdir);
 });
-it('mkdir', async () => {
+it('ensureMkdir', async () => {
   await ensureMkdir(__dirname);
   await ensureMkdir(path.join(workdir, 'onelevel'));
   await ensureMkdir(path.join(workdir, 'a', 'b', 'c', 'd'));

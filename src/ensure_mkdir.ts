@@ -1,6 +1,5 @@
 import path from 'path';
-import util from 'util';
-import fs from 'graceful-fs';
+import { mkdir } from './promise_fs';
 import isExist from './isexist';
 
 export default async function ensureMkdir(dir: string): Promise<void> {
@@ -14,6 +13,6 @@ export default async function ensureMkdir(dir: string): Promise<void> {
   }
   for (const toMk of toMkdir) {
     paths.push(toMk);
-    await util.promisify(fs.mkdir)(paths.join(path.sep));
+    await mkdir(paths.join(path.sep));
   }
 }
