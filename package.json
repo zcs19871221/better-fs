@@ -13,7 +13,7 @@
     "build": "node ./bin/clean.js && npm run compile && tsc",
     "test": "jest",
     "format": "prettier src --write",
-    "preversion": "npm run run build",
+    "preversion": "npm run build",
     "postversion": "node ./bin/copyPkg.js && cd dist && npm publish"
   },
   "repository": {
