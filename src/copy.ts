@@ -65,3 +65,5 @@ export default async function copy(
       throw new Error("参数错误");
   }
 }
+
+copy("F:\\better-fs\\src\\a", "F:\\better-fs\\src\\a\\copyA");
