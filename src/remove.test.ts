@@ -1,14 +1,14 @@
-import remove from './remove';
-import fs from 'fs';
-import path from 'path';
+import remove from "./remove";
+import fs from "fs";
+import path from "path";
 
 const workdir = path.join(
   process.cwd(),
   Array.from({ length: 5 }, () => {
     return String.fromCharCode(
-      'a'.charCodeAt(0) + Math.floor(Math.random() * 26),
+      "a".charCodeAt(0) + Math.floor(Math.random() * 26)
     );
-  }).join(''),
+  }).join("")
 );
 beforeAll(async () => {
   await remove(workdir);
@@ -17,21 +17,21 @@ beforeAll(async () => {
 afterAll(async () => {
   await remove(workdir);
 });
-it('remove', async () => {
-  const emptyDir = path.join(workdir, 'empty');
-  const emptySubDir = path.join(emptyDir, 'emptydSub');
-  const hasDir = path.join(workdir, 'has');
-  const rootFile = path.join(workdir, 'something.txt');
-  const hasFile = path.join(hasDir, 'hasFile.txt');
-  const hasSubDir = path.join(hasDir, 'hasSubDir');
-  const hasSubFile = path.join(hasDir, 'hasSubFile.text');
+it("remove", async () => {
+  const emptyDir = path.join(workdir, "empty");
+  const emptySubDir = path.join(emptyDir, "emptydSub");
+  const hasDir = path.join(workdir, "has");
+  const rootFile = path.join(workdir, "something.txt");
+  const hasFile = path.join(hasDir, "hasFile.txt");
+  const hasSubDir = path.join(hasDir, "hasSubDir");
+  const hasSubFile = path.join(hasDir, "hasSubFile.text");
   fs.mkdirSync(emptyDir);
   fs.mkdirSync(emptySubDir);
   fs.mkdirSync(hasDir);
-  fs.writeFileSync(rootFile, 'rootFile');
-  fs.writeFileSync(hasFile, 'hasFile');
+  fs.writeFileSync(rootFile, "rootFile");
+  fs.writeFileSync(hasFile, "hasFile");
   fs.mkdirSync(hasSubDir);
-  fs.writeFileSync(hasSubFile, 'hasSubFile');
+  fs.writeFileSync(hasSubFile, "hasSubFile");
 
   expect(fs.existsSync(emptyDir)).toBe(true);
   expect(fs.existsSync(emptySubDir)).toBe(true);

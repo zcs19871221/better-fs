@@ -1,5 +1,0 @@
-[production staging]
-node 10.16.0
-
-[jest]
-current node

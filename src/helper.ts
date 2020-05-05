@@ -1,18 +1,21 @@
-import { lstat } from './promise_fs';
-import isExist from './isExist';
+import { lstat } from "./promise_fs";
+import isExist from "./isExist";
 
 interface Filter {
-  filter?: (fileName: string, fileType: 'd' | 'f') => Promise<boolean>;
+  filter?: (
+    fileName: string,
+    fileType: "d" | "f"
+  ) => Promise<boolean> | boolean;
 }
 
-const getFileStat = async (locate: string): Promise<'d' | 'f' | 'n'> => {
+const getFileStat = async (locate: string): Promise<"d" | "f" | "n"> => {
   if (!(await isExist(locate))) {
-    return 'n';
+    return "n";
   }
   const destStat = await lstat(locate);
   if (destStat.isDirectory()) {
-    return 'd';
+    return "d";
   }
-  return 'f';
+  return "f";
 };
 export { Filter, getFileStat };
