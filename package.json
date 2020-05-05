@@ -7,6 +7,18 @@
     "email": "530627552@qq.com",
     "url": "https://github.com/zcs19871221"
   },
+  "keywords": [
+    "typescript",
+    "unit test cover",
+    "fs",
+    "file system",
+    "copy",
+    "directory",
+    "mkdirp",
+    "remove",
+    "move",
+    "promise"
+  ],
   "license": "ISC",
   "scripts": {
     "compile": "tsc",
