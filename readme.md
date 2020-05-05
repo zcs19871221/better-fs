@@ -19,7 +19,7 @@ typescript
 
 node
 
-    const fs = require('better-fs').default;
+    const fs = require('better-fs');
     fs.copy()
     fs.remove()
     ......
