@@ -19,4 +19,3 @@ export default function removeSync(
   readdirSync(target).map((each) => removeSync(path.join(target, each)));
   rmdirSync(target);
 }
-removeSync("F:\\better-fs\\mabqn");
