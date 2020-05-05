@@ -9,9 +9,12 @@
   },
   "license": "ISC",
   "scripts": {
-    "build": "tsc",
+    "compile": "tsc",
+    "build": "node ./bin/clean.js && npm run compile && tsc",
     "test": "jest",
-    "format": "prettier src --write"
+    "format": "prettier src --write",
+    "preversion": "npm run run build",
+    "postversion": "node ./bin/copyPkg.js && cd dist && npm publish"
   },
   "repository": {
     "type": "git",

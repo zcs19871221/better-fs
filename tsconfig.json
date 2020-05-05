@@ -9,7 +9,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "declaration": true
   },
   "exclude": ["**/*.test.ts", "dist"],
   "include": ["src/**/*"]
