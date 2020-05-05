@@ -10,7 +10,8 @@
   "license": "ISC",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier src --write"
   },
   "repository": {
     "type": "git",

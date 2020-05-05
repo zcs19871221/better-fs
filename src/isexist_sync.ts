@@ -1,6 +1,6 @@
 import fs from 'graceful-fs';
 
-export default function isExist(path: string): boolean {
+export default function isExistSync(path: string): boolean {
   try {
     fs.statSync(path);
     return true;

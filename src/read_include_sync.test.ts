@@ -1,5 +1,5 @@
 import remove from './remove';
-import readIncludes from './read_include';
+import readIncludes from './read_include_sync';
 import fs from 'fs';
 import path from 'path';
 
