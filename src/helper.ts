@@ -1,5 +1,7 @@
+import { lstatSync } from "graceful-fs";
 import { lstat } from "./promise_fs";
 import isExist from "./isExist";
+import isExistSync from "./isExistSync";
 
 interface Filter {
   filter?: (
@@ -18,4 +20,14 @@ const getFileStat = async (locate: string): Promise<"d" | "f" | "n"> => {
   }
   return "f";
 };
-export { Filter, getFileStat };
+const getFileStatSync = (locate: string): "d" | "f" | "n" => {
+  if (!isExistSync(locate)) {
+    return "n";
+  }
+  const destStat = lstatSync(locate);
+  if (destStat.isDirectory()) {
+    return "d";
+  }
+  return "f";
+};
+export { Filter, getFileStat, getFileStatSync };
