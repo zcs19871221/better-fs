@@ -6,6 +6,8 @@
 4. 全部用 `typescript` 开发,可靠性高,`vscode`智能提示支持
 5. 全部 api 有 `jest` 单元测试,测试覆盖率如下图
 
+![](https://raw.githubusercontent.com/zcs19871221/better-fs/master/cover.png)
+
 # 使用
 
 typescript
