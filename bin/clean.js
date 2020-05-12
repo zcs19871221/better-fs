@@ -1,4 +1,4 @@
 const path = require('path');
-const remove = require('../dist/remove_sync').default;
+const remove = require('./util/remove_sync').default;
 
 remove(path.join(__dirname, '../dist'));

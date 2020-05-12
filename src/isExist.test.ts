@@ -1,5 +1,5 @@
 import path from 'path';
-import isExist from './isExist';
+import isExist from './isexist';
 
 const src = path.join(process.cwd(), 'src');
 it('isExist', async () => {
