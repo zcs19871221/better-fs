@@ -22,7 +22,7 @@
   "license": "ISC",
   "scripts": {
     "compile": "tsc",
-    "build": "npm test && node ./bin/clean.js && npm run compile && tsc",
+    "build": "npm test && node ./bin/clean.js && npm run compile",
     "test": "jest",
     "format": "prettier src --write",
     "preversion": "npm run build",
